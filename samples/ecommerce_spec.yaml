@@ -1,0 +1,34 @@
+name: E-Commerce Platform
+description: A modern e-commerce platform with React frontend and Node.js backend
+project_type: web_app
+requirements:
+  - Build responsive product catalog with search and filtering
+  - Implement shopping cart and checkout process
+  - Create user authentication and profile management
+  - Add order tracking and history
+  - Integrate payment processing (Stripe)
+  - Implement admin panel for product management
+tech_stack:
+  - react
+  - nodejs
+  - postgresql
+  - stripe
+  - tailwind
+  - docker
+features:
+  - Product catalog with categories and search
+  - Shopping cart with persistent storage
+  - User registration and login
+  - Order placement and tracking
+  - Payment integration with Stripe
+  - Responsive design for mobile and desktop
+  - Admin dashboard for product management
+  - Inventory tracking
+  - Customer reviews and ratings
+architecture: "Modern SPA with RESTful API backend, using JWT authentication and Stripe for payments"
+constraints:
+  - Must support 1000+ concurrent users
+  - PCI DSS compliant payment processing
+  - Mobile-first responsive design
+target_audience: Online shoppers and store administrators
+deployment_target: docker

@@ -1,0 +1,16 @@
+# Valid agent_chains.yaml for testing
+mary:
+  primary: groq
+  fallbacks:
+    - cerebras
+    - gemini
+
+john:
+  primary: cerebras
+  fallbacks:
+    - groq
+
+alex:
+  primary: gemini
+  fallbacks:
+    - openrouter

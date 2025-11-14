@@ -1,0 +1,145 @@
+# Cost Optimization Strategy
+# Intelligent routing to minimize costs while maintaining quality
+
+# Provider cost tiers (USD per 1M tokens)
+cost_tiers:
+  free:
+    - groq          # $0 - Llama 3.3 70B (30 RPM, FASTEST)
+    - openrouter    # $0 - Qwen3 480B, DeepSeek 671B (20 RPM, BIGGEST!)
+    - cerebras      # $0 - Llama 3.1 8B (30 RPM)
+    - gemini        # $0 - Gemini 2.0 Flash (15 RPM)
+
+  low_cost:
+    - openai_mini   # ~$0.15/$0.60 (input/output) - GPT-4o-mini
+    - gemini_pro    # ~$0.35/$1.05 - Gemini 1.5 Pro
+
+  premium:
+    - openai        # ~$2.50/$10.00 - GPT-4o
+    - anthropic     # ~$3.00/$15.00 - Claude 3.5 Sonnet# Routing strategy by task complexity
+routing_rules:
+  # Simple tasks: Use free tier only
+  simple:
+    max_tokens: 500
+    temperature: 0.3
+    providers:
+      - groq        # Fast Llama 70B
+      - cerebras    # Fast Llama 8B
+      - gemini      # Flash 2.0
+    fallback: openai_mini
+
+  # Code tasks: Use OpenRouter Qwen3 480B (code specialist!)
+  code:
+    max_tokens: 2000
+    temperature: 0.3
+    providers:
+      - openrouter  # Qwen3 Coder 480B - BEST for code!
+      - groq        # Llama 70B backup
+      - openai_mini # Cheap paid fallback
+    fallback: openai
+
+  # Medium tasks: Prefer free, allow low-cost fallback
+  medium:
+    max_tokens: 2000
+    temperature: 0.7
+    providers:
+      - groq        # Try free first
+      - openrouter  # DeepSeek 671B
+      - gemini
+      - openai_mini # Fallback to cheap
+    fallback: openai
+
+  # Complex tasks: Use OpenRouter DeepSeek 671B!
+  complex:
+    max_tokens: 4000
+    temperature: 0.7
+    providers:
+      - openrouter  # DeepSeek R1T2 Chimera 671B!
+      - groq        # Llama 70B
+      - openai_mini # Then cheap
+      - openai      # Then premium
+    fallback: anthropic
+
+  # Critical tasks: Premium quality needed
+  critical:
+    max_tokens: 8000
+    temperature: 0.5
+    providers:
+      - anthropic   # Best quality
+      - openai      # Alternative premium
+    fallback: openai_mini
+
+# Agent-specific routing (override defaults)
+agent_routing:
+  analyst:
+    default_tier: simple
+    allow_premium: false  # Analysis doesn't need premium
+
+  architect:
+    default_tier: complex
+    allow_premium: true   # Architecture needs quality
+
+  dev:
+    default_tier: code        # Use OpenRouter Qwen3 480B for code!
+    allow_premium: false      # Code gen works great on free
+
+  pm:
+    default_tier: simple
+    allow_premium: false  # PM tasks are straightforward
+
+# Cost control limits
+cost_limits:
+  # Daily budget (USD)
+  daily_budget: 5.00
+
+  # Alert thresholds
+  alert_at_percent: 80  # Alert at 80% of budget
+
+  # Auto-fallback to free when budget exceeded
+  budget_exceeded_action: fallback_to_free
+
+  # Track costs per user/conversation
+  track_per_user: true
+  track_per_conversation: true
+
+# Token optimization
+token_optimization:
+  # Compress system prompts
+  compress_prompts: true
+
+  # Remove unnecessary whitespace
+  trim_whitespace: true
+
+  # Use cheaper models for prompt planning
+  use_local_optimizer: true  # Use local LLM for prompt optimization
+
+  # Cache system prompts (reduce input tokens)
+  cache_system_prompts: true
+
+  # Streaming responses (fail fast if bad output)
+  enable_streaming: true
+
+# Rate limiting to avoid overspending
+rate_limiting:
+  # Free tier: No limits (already rate limited by providers)
+  free_tier_rpm: null
+
+  # Paid tier: Strict limits
+  paid_tier_rpm: 10      # Max 10 requests/min to paid APIs
+  paid_tier_tpm: 50000   # Max 50k tokens/min to paid APIs
+
+  # Per-user limits on paid APIs
+  per_user_paid_rpm: 2   # Each user max 2 paid requests/min
+
+# Monitoring and reporting
+monitoring:
+  # Log all paid API calls
+  log_paid_calls: true
+
+  # Daily cost reports
+  daily_reports: true
+
+  # Real-time cost tracking
+  track_costs: true
+
+  # Cost metrics in Prometheus
+  export_metrics: true

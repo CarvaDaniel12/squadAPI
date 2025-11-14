@@ -1,0 +1,34 @@
+name: User Management API
+description: RESTful API service for user authentication and profile management
+project_type: api_service
+requirements:
+  - Create JWT-based authentication endpoints
+  - Implement user CRUD operations
+  - Add password reset and email verification
+  - Build role-based access control (RBAC)
+  - Implement rate limiting and security measures
+  - Add comprehensive API documentation
+tech_stack:
+  - python
+  - fastapi
+  - postgresql
+  - redis
+  - sqlalchemy
+  - alembic
+features:
+  - User registration and login
+  - JWT token management
+  - Password reset functionality
+  - Email verification
+  - Role-based permissions
+  - API rate limiting
+  - Swagger/OpenAPI documentation
+  - Database migrations
+  - Comprehensive error handling
+architecture: "RESTful API with FastAPI, using SQLAlchemy ORM and Alembic for migrations"
+constraints:
+  - Handle 500+ requests per minute
+  - 99.9% uptime requirement
+  - Secure password hashing and JWT handling
+target_audience: Backend developers and API consumers
+deployment_target: kubernetes

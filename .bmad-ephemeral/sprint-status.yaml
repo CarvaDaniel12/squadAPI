@@ -1,0 +1,181 @@
+# generated: 2025-11-13
+# project: squad api
+# project_key: squad api
+# tracking_system: file-system
+# story_location: docs/stories
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic exists in epic file but not contexted
+#   - contexted: Epic tech context created (required before drafting stories)
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved and story context created
+#   - in-progress: Developer actively working on implementation
+#   - review: Under SM review (via code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - completed: Retrospective has been done
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epics should be 'contexted' before stories can be 'drafted'
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically drafts next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', SM reviews, then Dev moves to 'done'
+
+generated: "2025-11-13"
+project: "squad api"
+project_key: "squad api"
+tracking_system: "file-system"
+story_location: "docs/stories"
+
+development_status:
+  # Epic 0: Project Foundation & Infrastructure
+  epic-0: done
+  0-1-monorepo-setup-e-estrutura-inicial: done
+  0-2-dependencies-e-requirements-management: done
+  0-3-docker-compose-redis-setup: done
+  0-4-docker-compose-postgresql-setup: done
+  0-5-docker-compose-prometheus-setup: done
+  0-6-docker-compose-grafana-setup: done
+  0-7-fastapi-application-skeleton: done
+  0-8-docker-compose-squad-api-service-integration: done
+  epic-0-retrospective: optional
+
+  # Epic 1: Agent Transformation Engine
+  epic-1: done
+  1-1-bmad-agent-file-parser: done
+  1-2-agent-definition-models-pydantic: done
+  1-3-agent-loader-service: done
+  1-4-system-prompt-builder: done
+  1-5-conversation-state-manager-redis: done
+  1-6-agent-router-core-logic: done
+  1-7-agent-execution-orchestrator: done
+  1-8-agent-list-endpoint: done
+  1-9-context-window-management: done
+  1-10-agent-hot-reload-support: done
+  1-11-basic-integration-test-agent-execution: done
+  1-12-error-handling-agent-not-found: done
+  1-13-tool-definition-system: done
+  1-14-tool-executor-engine: done
+  1-15-multi-turn-tool-calling-loop: done
+  1-16-web-search-tool-integration: done
+  epic-1-retrospective: optional
+
+  # Epic 2: Rate Limiting Layer
+  epic-2: done
+  2-1-token-bucket-algorithm-implementation: done
+  2-2-sliding-window-60s-implementation: done
+  2-3-combined-token-bucket-sliding-window: done
+  2-4-global-semaphore-implementation: done
+  2-5-retry-with-exponential-backoff: done
+  2-6-retry-after-header-support-429-responses: done
+  2-7-rate-limiter-integration-com-agent-orchestrator: done
+  2-8-rate-limiting-metrics-basic: done
+  epic-2-retrospective: optional
+
+  # Epic 3: Provider Wrappers
+  epic-3: done
+  3-1-llmprovider-abstract-interface: done
+  3-2-groq-provider-implementation: done
+  3-3-cerebras-provider-implementation: done
+  3-4-gemini-provider-implementation-sdk: done
+  3-5-openrouter-provider-implementation: done
+  3-6-together-ai-provider-implementation-optional: skipped  # Optional, not needed for MVP
+  3-7-provider-factory-registry: done
+  3-8-stub-provider-for-testing: done
+  epic-3-retrospective: optional
+
+  # Epic 4: Fallback & Resilience
+  epic-4: done
+  4-1-fallback-chain-executor: done
+  4-2-quality-validation-auto-escalation: done
+  4-3-auto-throttling-spike-detection: done
+  4-4-auto-throttling-rpm-reduction: done
+  4-5-auto-throttling-restore-logic: done
+  4-6-integration-test-fallback-scenario: done
+  epic-4-retrospective: optional
+
+  # Epic 5: Observability Foundation
+  epic-5: done  # All 5 stories complete: Request metrics, Latency metrics, Token metrics, JSON logging, Metrics integration
+  5-1-prometheus-metrics-request-tracking: done  # 7 tests passing, 75% coverage
+  5-2-prometheus-metrics-latency-tracking: done  # 9 tests passing, 71% coverage
+  5-3-prometheus-metrics-token-consumption: done  # 8 tests passing, tokens + quota tracking validated
+  5-4-structured-json-logging: done  # 12 tests passing, 100% coverage, TimedRotatingFileHandler implemented
+  5-5-metrics-integration-orchestrator: done  # 9 tests passing, 80% coverage on orchestrator, metrics + logging integrated
+  epic-5-retrospective: optional
+
+  # Epic 6: Monitoring Dashboards & Alerts
+  epic-6: done  # ✅ 6/6 stories DONE (100% Epic 6 complete!)
+  6-1-grafana-dashboard-request-success-rate: done  # Dashboard JSON created, 4 panels, auto-refresh 15s
+  6-1-5-rate-limiter-prometheus-metrics: done  # Dependency story: 4 Prometheus gauges implemented, 3/3 tests passing
+  6-1-6-fix-prometheus-metrics-inconsistencies: done  # Bug fix: 256/262 tests passing (97.7%), metrics deduplicated, labels aligned
+  6-2-grafana-dashboard-rate-limiting-health: done  # Dashboard JSON created, 6 panels, rate limiting health monitoring
+  6-3-grafana-dashboard-performance-metrics: done  # Dashboard JSON created, 4 panels, latency P50/P95/P99, heatmap
+  6-4-grafana-dashboard-cost-quota-tracking: done  # Dashboard JSON created, 5 panels, quota tracking, projection, free-tier limits
+  6-5-slack-alerts-429-spike-alert: done  # Slack webhook integration, 5min cooldown, async fire-and-forget, 9/9 tests passing
+  6-6-slack-alerts-latency-health-alerts: done  # Latency & health alerts with per-type throttling, 14/14 tests passing
+  epic-6-retrospective: optional
+
+  # Epic 7: Configuration System
+  epic-7: done  # 5/5 stories complete - Hot-reload system finished!
+  7-1-yaml-config-loader: done  # ConfigLoader + Pydantic models, 15/15 tests passing, 93-94% coverage
+  7-2-environment-variables-validation: done  # Settings with pydantic-settings, 14/14 tests passing, 100% coverage, main.py integration
+  7-3-config-validation-on-startup: done  # Cross-validation of YAML + env vars, 14/14 tests passing, 86% coverage
+  7-4-config-documentation: done  # Comprehensive docs/configuration.md guide (5500+ words)
+  7-5-config-change-monitoring: done  # Hot-reload with watchdog, 26/26 tests passing, 97-100% coverage
+  epic-7-retrospective: optional
+
+  # Epic 8: Deployment & Documentation
+  epic-8: done  # ✅ 7/7 stories DONE (100% Epic 8 complete!)
+  8-1-docker-compose-complete-stack:
+    status: done
+    notes: "docker-compose.yaml enhanced: networks, volumes, health checks, resource limits, labels. YAML validated."
+  8-2-readme-quick-start:
+    status: done
+    notes: "README.md updated with Docker Compose quick start, architecture diagram, observability section, documentation links."
+  8-3-deployment-runbook:
+    status: done
+    notes: "Comprehensive deployment runbook created covering production deployment, environment setup, health verification, rollback, scaling, backup/recovery, security."
+  8-4-troubleshooting-runbook:
+    status: done
+    notes: "Comprehensive troubleshooting runbook with 19 common issues: provider failures, rate limiting, fallback, memory, network, database, config, performance, monitoring."
+  8-5-architecture-decision-records:
+    status: done
+    notes: "Created 15 ADRs documenting Epic 0-8 decisions: Docker Compose, Redis, PostgreSQL, rate limiting, fallback, Prometheus, hot-reload."
+  8-6-api-documentation-openapi-swagger:
+    status: done
+    notes: "Enhanced OpenAPI/Swagger documentation at /docs and /redoc. Comprehensive Field descriptions, examples, response schemas. Pydantic models documented."
+  8-7-end-to-end-integration-test:
+    status: done
+    notes: "Created 11 E2E tests (OpenAPI docs, health, metrics) + 15 unit tests (request validation). All tests passing. Full E2E with orchestrator deferred to Epic 9."
+  epic-8-retrospective: optional
+
+  # Epic 9: Production Readiness
+  epic-9: contexted  # Epic 9 contexted - Story 9.3 DONE with 12/12 tests passing
+  9-1-pii-sanitization-detection: ready-for-dev  # ✅ Story 9.1 IMPLEMENTED: 15/15 tests passing (13 unit + 2 integration), Orchestrator integrated (2025-11-13)
+  9-2-pii-sanitization-auto-redact: ready-for-dev  # ✅ Story 9.2 IMPLEMENTED: 11/11 tests passing (9 unit + 2 integration), redactions working (2025-11-13)
+  9-3-audit-logging-postgresql-table: done  # ✅ Story 9.3 COMPLETE: AuditLogger async, Orchestrator integration, 12/12 tests passing (2025-11-13)
+  9-4-health-check-endpoint-enhancement: ready-for-dev  # ✅ Story 9.4 IMPLEMENTED: 20/20 tests passing (16 unit + 4 integration), HealthChecker + probes + API endpoint (2025-11-13)
+  9-5-provider-status-endpoint: backlog
+  9-6-load-testing-com-locust: backlog
+  9-7-security-review-checklist: backlog
+  9-8-production-go-live-procedure: backlog
+  epic-9-retrospective: optional
+
+  # Epic 10: Simple Agent Status UI
+  epic-10: backlog
+  10-1-websocket-server-para-real-time-updates: backlog
+  10-2-agent-status-data-model: backlog
+  10-3-status-tracking-idle-active-degraded-failed: backlog
+  10-4-simple-html-js-status-board: backlog
+  10-5-status-board-static-file-serving: backlog
+  10-6-agent-status-integration-test: backlog
+  epic-10-retrospective: optional
+

@@ -1,0 +1,58 @@
+# Workflow Status Template
+# This tracks progress through BMM methodology phases
+# Phase 3/4 (Implementation) is tracked separately in sprint-status.yaml
+
+# generated: 2025-11-12
+# project: Squad API
+# project_type: software
+# selected_track: method
+# field_type: greenfield
+# workflow_path: method-greenfield.yaml
+
+# STATUS DEFINITIONS:
+# ==================
+# Initial Status (before completion):
+#   - required: Must be completed to progress
+#   - optional: Can be completed but not required
+#   - recommended: Strongly suggested but not required
+#   - conditional: Required only if certain conditions met (e.g., if_has_ui)
+#
+# Completion Status:
+#   - {file-path}: File created/found (e.g., "docs/product-brief.md")
+#   - skipped: Optional/conditional workflow that was skipped
+
+generated: "2025-11-12"
+project: "Squad API"
+project_type: "software"
+selected_track: "method"
+field_type: "greenfield"
+workflow_path: "method-greenfield.yaml"
+
+workflow_status:
+  # Phase 0: Discovery (Optional)
+  research: docs/research-technical-2025-11-12.md  # agent: analyst
+  product-brief: docs/product-brief-squad-api-2025-11-12.md  # agent: analyst
+
+  # Phase 1: Planning
+  prd: docs/PRD.md  # agent: pm
+  epics: docs/epics.md  # agent: pm (embedded in prd workflow)
+  validate-prd: optional  # agent: pm
+  create-design: conditional  # agent: ux-designer
+
+  # Phase 2: Solutioning
+  create-architecture: docs/architecture.md  # agent: architect (completed 2025-11-13)
+  validate-architecture: skipped  # agent: architect (architecture comprehensive enough)
+  solutioning-gate-check: approved  # agent: architect (completed 2025-11-13 - all criteria met)
+
+  # Phase 3: Implementation
+  sprint-planning: completed  # agent: sm (completed 2025-11-13)
+  # Current Epic: Epic 5 - Observability (2025-11-13)
+  # Epic 0 Status: ✅ DONE (8/8 stories)
+  # Epic 1 Status: ✅ DONE (16/16 stories)
+  # Epic 2 Status: ✅ DONE (8/8 stories)
+  # Epic 3 Status: ✅ DONE (7/8 stories - Together AI skipped)
+  # Epic 4 Status: ✅ DONE (6/6 stories)
+  # Epic 5 Status: 🟡 IN PROGRESS (0/X stories) - NEXT
+  # Test Status: ✅ 216/222 passing (97.3%), coverage 70%
+  # Overall Progress: 45% (5/11 epics complete)
+

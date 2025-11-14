@@ -1,0 +1,73 @@
+# Agent-to-Provider Routing Configuration
+# Maps each agent to optimal provider based on task characteristics
+
+# Routing strategy:
+# - Boss tier (complex reasoning) → Groq (Llama-3.3-70B)
+# - Worker tier (fast tasks) → Cerebras (Llama-3.1-8B)
+# - Creative tasks → Gemini (Gemini 2.0 Flash)
+# - Fallback/diversity → OpenRouter (Auto-routing)
+
+# BOSS TIER - Complex reasoning, high quality
+analyst:
+  primary: groq              # Mary needs deep reasoning (requirements analysis)
+  fallback: [gemini, cerebras, openrouter]
+
+architect:
+  primary: groq              # Winston needs technical depth (system design)
+  fallback: [gemini, cerebras, openrouter]
+
+pm:
+  primary: groq              # John needs strategic thinking (product planning)
+  fallback: [gemini, cerebras, openrouter]
+
+# WORKER TIER - Fast execution, high throughput
+dev:
+  primary: cerebras          # Amelia needs speed (code generation)
+  fallback: [groq, gemini, openrouter]
+
+tea:
+  primary: cerebras          # Murat needs speed (test generation)
+  fallback: [groq, gemini, openrouter]
+
+# CREATIVE TIER - Multimodal, creative tasks
+'tech writer':
+  primary: gemini            # Paige benefits from Gemini's writing capability
+  fallback: [groq, cerebras, openrouter]
+
+'ux designer':
+  primary: gemini            # Sally needs creative reasoning
+  fallback: [groq, cerebras, openrouter]
+
+# BALANCED TIER - Sprint management, coordination
+sm:
+  primary: cerebras          # Bob needs fast responses for sprint coordination
+  fallback: [groq, gemini, openrouter]
+
+# Default routing (if agent not specified above)
+default:
+  primary: groq
+  fallback: [cerebras, gemini, openrouter]
+
+# Load balancing strategy
+load_balancing:
+  enabled: true
+  algorithm: round_robin  # Options: round_robin, least_latency, least_load
+  
+# Provider tier classification
+tiers:
+  boss:
+    providers: [groq]
+    agents: [analyst, architect, pm]
+    
+  worker:
+    providers: [cerebras]
+    agents: [dev, tea, sm]
+    
+  creative:
+    providers: [gemini]
+    agents: [tech-writer, ux-designer]
+    
+  fallback:
+    providers: [openrouter]
+    agents: []  # Available for all as fallback
+

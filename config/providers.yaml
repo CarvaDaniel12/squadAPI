@@ -1,0 +1,114 @@
+# LLM Provider Configuration
+# Each provider with: enabled, model, api_key_env, timeout
+
+# Anthropic Claude (Available API Key)
+anthropic:
+  name: "anthropic"
+  type: anthropic
+  enabled: true
+  model: "claude-3-5-sonnet-20241022"
+  api_key_env: "ANTHROPIC_API_KEY"
+  rpm_limit: 50  # Requests per minute
+  tpm_limit: 20000  # Tokens per minute
+  timeout: 30
+
+# OpenAI GPT (Available API Key)
+openai:
+  name: "openai"
+  type: openai
+  enabled: true
+  model: "gpt-4o"
+  api_key_env: "OPENAI_API_KEY"
+  rpm_limit: 500  # Requests per minute (high limit)
+  tpm_limit: 500000  # Tokens per minute
+  timeout: 30
+
+# Groq (API Key Required)
+groq:
+  name: "groq"
+  type: groq
+  enabled: true
+  model: "llama-3.3-70b-versatile"
+  api_key_env: "GROQ_API_KEY"
+  rpm_limit: 30  # Requests per minute
+  tpm_limit: 6000  # Tokens per minute
+  timeout: 30
+
+# Cerebras (API Key Required)
+cerebras:
+  name: "cerebras"
+  type: cerebras
+  enabled: true
+  model: "llama3.1-8b"
+  api_key_env: "CEREBRAS_API_KEY"
+  base_url: "https://api.cerebras.ai/v1"
+  rpm_limit: 30  # Requests per minute
+  tpm_limit: 100000  # Tokens per minute
+  timeout: 30
+
+# Google Gemini (API Key Required)
+gemini:
+  name: "gemini"
+  type: gemini
+  enabled: true
+  model: "gemini-2.0-flash-exp"
+  api_key_env: "GEMINI_API_KEY"
+  rpm_limit: 60  # Requests per minute
+  tpm_limit: 15000  # Tokens per minute
+  timeout: 30
+
+# OpenRouter (API Key Required)
+openrouter:
+  name: "openrouter"
+  type: openrouter
+  enabled: true
+  model: "openrouter/auto"
+  api_key_env: "OPENROUTER_API_KEY"
+  base_url: "https://openrouter.ai/api/v1"
+  rpm_limit: 20  # Requests per minute
+  tpm_limit: 200000  # Tokens per minute
+  timeout: 45
+
+# Together AI (Paid Tier - $5 minimum - Optional)
+together:
+  name: "together"
+  type: together
+  model: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
+  base_url: "https://api.together.xyz/v1"
+  rpm_limit: 60
+  tpm_limit: 600000
+  max_tokens: 2000
+  temperature: 0.7
+  timeout: 30
+  enabled: false  # Disabled by default (requires payment)
+  api_key_env: "TOGETHER_API_KEY"
+
+# Local prompt optimizer (lightweight model running on the same host)
+prompt_optimizer:
+  enabled: false  # Disabled for now - enable after fixing integration
+  runtime: "ollama"  # Options: ollama, llama-cpp, gpt4all
+  endpoint: "http://localhost:11434"  # Ollama API endpoint
+  model_path: "qwen3:8b"  # Model name for Ollama (lightweight and efficient)
+  max_context_tokens: 4096
+  temperature: 0.3
+  bmad_config: "config/bmad_method.yaml"
+  aggregation_prompt: "Summarize specialist outputs and highlight Agile compliance."
+
+# Fallback chains (Epic 4)
+# fallback_chains:
+#   default:
+#     - groq
+#     - cerebras
+#     - gemini
+#     - openrouter
+#     - openrouter-qwen3
+#     - openrouter-gemini-flash
+#
+#   boss:  # For critical/high-quality tasks
+#     - groq  # Llama-3-70B (best quality)
+#     - gemini  # Gemini 2.0 Flash
+#     - openrouter-gemini-flash  # Gemini 2.0 Flash Experimental (Free)
+#
+#   worker:  # For high-throughput tasks
+#     - cerebras  # Llama-3-8B (fastest)
+#     - openrouter-qwen3  # Qwen3 Coder (Free, fast)

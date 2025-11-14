@@ -1,0 +1,36 @@
+# BMAD Method Configuration for Local Prompt Optimizer
+# This configuration guides the local LLM in structuring and synthesizing responses
+
+# Optimization strategies
+optimization:
+  prompt_enhancement: true
+  context_building: true
+  output_synthesis: true
+
+# Task categorization rules
+task_types:
+  technical_analysis:
+    keywords: [analyze, review, evaluate, assess]
+    template: "Analyze the following technical content..."
+
+  code_generation:
+    keywords: [create, generate, implement, build]
+    template: "Generate code for the following requirement..."
+
+  debugging:
+    keywords: [debug, fix, troubleshoot, error]
+    template: "Debug and fix the following issue..."
+
+# Synthesis guidelines
+synthesis:
+  remove_duplicates: true
+  resolve_contradictions: true
+  maintain_technical_accuracy: true
+  tone: "professional"
+  max_length: 2000
+
+# Response formatting
+formatting:
+  include_summaries: true
+  include_recommendations: true
+  include_next_steps: false

@@ -1,0 +1,29 @@
+# Rate Limiting Configuration for Squad API
+# Each provider needs: rpm, burst, tokens_per_minute
+
+groq:
+  rpm: 30
+  burst: 30
+  tokens_per_minute: 20000
+
+cerebras:
+  rpm: 30
+  burst: 30
+  tokens_per_minute: 180000
+
+gemini:
+  rpm: 15
+  burst: 15
+  tokens_per_minute: 1000000
+
+openrouter:
+  rpm: 20
+  burst: 20
+  tokens_per_minute: 200000
+
+together:
+  rpm: 60
+  burst: 60
+  tokens_per_minute: 10000000
+
+

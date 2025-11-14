@@ -1,0 +1,53 @@
+# Load Testing Configuration
+# Used by Locust and pytest load test scenarios
+
+scenarios:
+  warm_up:
+    users: 5
+    spawn_rate: 5
+    duration: 60
+    description: "Baseline warm-up, 5 req/s for 1 minute"
+
+  sustained:
+    users: 30
+    spawn_rate: 30
+    duration: 300
+    description: "Sustained load, 30 req/s for 5 minutes (9000 requests total)"
+
+  spike:
+    users: 60
+    spawn_rate: 60
+    duration: 120
+    description: "Spike detection, 60 req/s for 2 minutes"
+
+thresholds:
+  success_rate_min: 0.99  # > 99%
+  rate_limited_max: 0.01  # < 1% 429 responses acceptable
+  p95_latency_max_ms: 2000  # P95 < 2 seconds
+  p99_latency_max_ms: 3000  # P99 < 3 seconds
+  spike_p99_latency_max_ms: 5000  # P99 < 5 seconds during spike
+  error_rate_max: 0.001  # < 0.1% 5xx errors
+
+provider_settings:
+  enabled_providers:
+    - groq
+    - gemini
+  track_rpm: true  # Monitor rate limit usage
+  track_fallback: true  # Count fallback activations
+  track_429s: true  # Count rate limit responses
+
+endpoints:
+  chat:
+    weight: 80  # 80% of requests
+    description: "POST /agents/chat - Main chat endpoint"
+    timeout: 30
+
+  health:
+    weight: 15  # 15% of requests
+    description: "GET /health - Health check endpoint"
+    timeout: 10
+
+  metrics:
+    weight: 5  # 5% of requests
+    description: "GET /metrics - Prometheus metrics endpoint"
+    timeout: 10

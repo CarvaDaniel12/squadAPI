@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+  - name: 'Squad API Dashboards'
+    orgId: 1
+    folder: 'Squad API'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: true

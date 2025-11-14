@@ -1,0 +1,20 @@
+# Invalid rate limits - rpm = 0 (should be > 0)
+groq:
+  rpm: 0
+  burst: 15
+  tokens_per_minute: 14400
+
+cerebras:
+  rpm: 20
+  burst: 25
+  tokens_per_minute: 1000000
+
+gemini:
+  rpm: 15
+  burst: 20
+  tokens_per_minute: 1500000
+
+openrouter:
+  rpm: 10
+  burst: 12
+  tokens_per_minute: 100000

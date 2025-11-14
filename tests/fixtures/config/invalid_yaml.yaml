@@ -1,0 +1,4 @@
+# Invalid YAML - syntax error
+groq:
+  rpm: 12
+  burst: invalid syntax here [

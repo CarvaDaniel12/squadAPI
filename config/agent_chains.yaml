@@ -1,0 +1,26 @@
+# Agent Fallback Chain Configuration
+# Each agent has: primary provider and list of fallback providers
+
+# MARY - Boss Agent (High Quality Chain)
+mary:
+  primary: groq
+  fallbacks:
+    - cerebras
+    - gemini
+    - openrouter
+
+# JOHN - Worker Agent (Speed Chain)
+john:
+  primary: cerebras
+  fallbacks:
+    - groq
+    - gemini
+    - openrouter
+
+# ALEX - Balanced Agent (Reliable Chain)
+alex:
+  primary: groq
+  fallbacks:
+    - cerebras
+    - gemini
+    - openrouter

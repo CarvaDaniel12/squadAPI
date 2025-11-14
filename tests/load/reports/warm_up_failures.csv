@@ -1,0 +1,4 @@
+Method,Name,Error,Occurrences
+GET,/health,CatchResponseError('Health check failed: 0'),5
+POST,/agents/chat,CatchResponseError('Unexpected status 0: '),29
+GET,/metrics,CatchResponseError('Metrics endpoint failed: 0'),1
